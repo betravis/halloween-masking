@@ -43,7 +43,7 @@ CardHandler.moveHandler = function(event) {
     var relY = event.pageY - offset.top;
     if (!spotlight.hasClass("active")) {
         spotlight.addClass("active");
-        spotlight.animate({ r: "50%" }, 1000, mina.easeinout);
+        spotlight.animate({ r: "160" }, 1000, mina.easeinout);
     }
     spotlight.attr({
         cx: relX,
@@ -58,7 +58,7 @@ CardHandler.outHandler = function(event) {
             return;
     if (spotlight.inAnim())
         spotlight.stop();
-    spotlight.animate({ r: "0%" }, 1000, mina.easeinout);
+    spotlight.animate({ r: "0" }, 1000, mina.easeinout);
     spotlight.removeClass("active");
 }
 
@@ -70,11 +70,11 @@ CardHandler.clickHandler = function(event) {
     spotlight.toggleClass("frozen");
     if (spotlight.hasClass("frozen")) {
         spotlight.animate({
-            cx: "50%",
-            cy: "50%",
-            r: "50%"
+            cx: "160",
+            cy: "100",
+            r: "160"
         }, 500, mina.easeinout);
     } else {
-        spotlight.animate({ r: "0%" }, 500, mina.easeinout);
+        spotlight.animate({ r: "0" }, 500, mina.easeinout);
     }
 }

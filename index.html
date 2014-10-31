@@ -14,7 +14,7 @@
 
 <h1>Happy Halloween</h1>
 
-<p>A seasonal experiment inspired by CJ Gammon&rsquo;s <a href="http://cjgammon.com">masking&nbsp;interaction</a>.<br/>
+<p>A seasonal experiment inspired by CJ Gammon&rsquo;s <a href="http://cjgammon.com">masking interaction</a>.<br/>
 Try click/hover/drag.</p>
 
 <div class="tile-area">
@@ -23,7 +23,7 @@ Try click/hover/drag.</p>
 {% for monster in monsters %}
 <div class="tile">
     <img src="resources/{{ monster }}.svg" >
-    <svg id="{{ monster }}" class="tile-mask">
+    <svg id="{{ monster }}" class="tile-mask" viewBox="0 0 320 200">
         <mask id="mask{{ forloop.index }}">
             <rect x="0" y="0" width="100%" height="100%" fill="white" />
             <circle cx="0" cy="0" r="0" id="circle1" fill="black" />
