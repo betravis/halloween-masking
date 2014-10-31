@@ -1,6 +1,6 @@
-function CardHandler(svgElement) {
+function CardHandler(svgElement, spotlightSelector) {
     this.s = Snap(svgElement);
-    this.spotlight = this.s.select("mask circle");
+    this.spotlight = this.s.select(spotlightSelector);
 
     /* mouse events */
     this.move = CardHandler.moveHandler.bind(this);
@@ -14,6 +14,8 @@ function CardHandler(svgElement) {
     this.s.touchstart(CardHandler.startHandler.bind(this));
     this.s.touchend(CardHandler.endHandler.bind(this));
 }
+
+CardHandler.duration = 400;
 
 CardHandler.startHandler = function(event) {
     this.s.unmousemove(this.move);
@@ -43,7 +45,7 @@ CardHandler.moveHandler = function(event) {
     var relY = event.pageY - offset.top;
     if (!spotlight.hasClass("active")) {
         spotlight.addClass("active");
-        spotlight.animate({ r: "160" }, 1000, mina.easeinout);
+        spotlight.animate({ r: "160" }, CardHandler.duration, mina.easeinout);
     }
     spotlight.attr({
         cx: relX,
@@ -58,7 +60,7 @@ CardHandler.outHandler = function(event) {
             return;
     if (spotlight.inAnim())
         spotlight.stop();
-    spotlight.animate({ r: "0" }, 1000, mina.easeinout);
+    spotlight.animate({ r: "0" }, CardHandler.duration, mina.easeinout);
     spotlight.removeClass("active");
 }
 
@@ -75,6 +77,6 @@ CardHandler.clickHandler = function(event) {
             r: "160"
         }, 500, mina.easeinout);
     } else {
-        spotlight.animate({ r: "0" }, 500, mina.easeinout);
+        spotlight.animate({ r: "0" }, CardHandler.duration, mina.easeinout);
     }
 }
