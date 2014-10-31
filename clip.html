@@ -1,0 +1,62 @@
+---
+---
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Halloween</title>
+    <link href="resources/main.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+<h1>Happy Halloween</h1>
+
+<p>A seasonal experiment inspired by CJ Gammon&rsquo;s <a href="http://cjgammon.com">masking interaction</a>.<br/>
+Try click/hover/drag. (clip-path variant)</p>
+
+<div class="tile-area">
+
+{% assign monsters = "reaper|jacko|mummy|werewolf|ghost|vampire|skeleton|zombie|witch" | split: "|" %}
+{% for monster in monsters %}
+<div class="tile" id="{{ monster }}">
+    
+    <svg class="tile-bg" viewBox="0 0 320 200">
+        <g class="cover {% cycle '', ' invert' %}">
+            <rect x="0" y="0" width="100%" height="100%" fill="gray" />
+            <use xlink:href="resources/bat.svg#bat" width="100%" height="100%" />
+        </g>
+    </svg>
+    <svg class="tile-fg" id="tile-fg-{{ forloop.index }}" viewBox="0 0 320 200" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <clipPath id="clip{{ forloop.index }}">
+            <circle cx="50%" cy="50%" r="0" />
+        </clipPath>
+        <rect width="100%" height="100%" fill="transparent" />
+        <g clip-path="url(#clip{{ forloop.index }})">
+            <rect width="100%" height="100%" fill="white" />
+            <use xlink:href="resources/halloween.svg#{{ monster }}" width="100%" height="100%"  />
+        </g>
+    </svg>
+</div>
+{% endfor %}
+
+</div>
+
+<p>Artwork from <a href="http://freepik.com">Freepik</a> and <a href="http://thenounproject/bashburn">The Noun Project</a>. <br/>
+<a href="https://github.com/betravis/halloween-masking/">View source</a></p>
+
+<script src="resources/jquery-2.1.1.min.js"></script>
+<script src="resources/snap.svg-0.3.0.min.js"></script>
+<script src="resources/card-handler.js"></script>
+<script>
+$(function() {
+    $(".tile-fg").each(function(i, el) {
+        new CardHandler(el, el.id.replace("tile-fg-", "#clip") + " circle");
+    });
+});
+</script>
+
+</body>
+</html>
