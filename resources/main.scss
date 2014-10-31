@@ -14,10 +14,20 @@ h1 {
         font-size: 5em;
     }
 }
+
 h1, p {
     max-width: 800px;
     margin: .5em auto;
 }
+
+p {
+    padding: 0 .5em;
+}
+
+a {
+    white-space: nowrap;
+}
+
 .tile-area {
     text-align: center;
     max-width: 1200px;
