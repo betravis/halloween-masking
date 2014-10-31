@@ -1,9 +1,33 @@
 function CardHandler(svgElement) {
     this.s = Snap(svgElement);
     this.spotlight = this.s.select("mask circle");
-    this.mousemove = CardHandler.moveHandler.bind(this);
-    this.mouseout = CardHandler.outHandler.bind(this);
+
+    /* mouse events */
+    this.move = CardHandler.moveHandler.bind(this);
+    this.out = CardHandler.outHandler.bind(this);
     this.click = CardHandler.clickHandler.bind(this);
+    this.s.mousemove(this.move);
+    this.s.mouseout(this.out);
+    this.s.click(this.click);
+
+    /* touch events */
+    this.s.touchstart(CardHandler.startHandler.bind(this));
+    this.s.touchend(CardHandler.endHandler.bind(this));
+}
+
+CardHandler.startHandler = function(event) {
+    this.s.unmousemove(this.move);
+    this.s.unmouseout(this.out);
+    this.s.unclick(this.click);
+
+    this.s.touchmove(this.move);
+    this.move(event);
+}
+
+CardHandler.endHandler = function(event) {
+    this.s.untouchmove(this.mousemove);
+    this.out(event);
+
     this.s.mousemove(this.mousemove);
     this.s.mouseout(this.mouseout);
     this.s.click(this.click);
